@@ -15,7 +15,7 @@ async function post_to_url(url, data) {
    
   }
 
-export default function Login() {
+export default function Login({handleSignin}) {
     const URL = "http://localhost:3001/sign-in"
     const [value, setValue] = useState({
         email: '',
@@ -25,7 +25,10 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         post_to_url(URL, value)
-          .then(data => console.log(data));
+          .then(data => {
+            if (data.token) handleSignin(data);
+            else console.log('nope');
+          });
     }
 
     const handleChange = (e) => {
