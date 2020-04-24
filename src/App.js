@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
 import Login from './Components/Login/Login'
+import Requests from './Libraries/Requests'
 
 
 function App() {
@@ -14,7 +15,11 @@ function App() {
   useEffect(() => {
     //if we have a token stored, we will try make a get request to /validate
     if (localStorage.token){
-      
+      Requests.validate(localStorage.token)
+        .then(data => {
+          setEmail(data.email);
+          localStorage.token = data.token;
+        })
     }
   }, [])
 
