@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import Requests from '../../Libraries/Requests'
 
 async function post_to_url(url, data) {
     const response = await fetch(url, {
@@ -24,7 +24,8 @@ export default function Login({handleSignin}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post_to_url(URL, value)
+
+        Requests.signIn(value)
           .then(data => {
             if (data.token) handleSignin(data);
             else console.log('nope');
