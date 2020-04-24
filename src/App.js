@@ -20,12 +20,12 @@ function App() {
           setEmail(data.email);
           localStorage.token = data.token;
         })
-    }
-  }, [])
+    }else console.log('noow');
+  }, [localStorage.token])
 
   return (
     <div className="App">
-      <h2>Hello {email !== null ? email : "stranger"}</h2>
+      <h2>{email !== null ? `welcome ${email}` : "welcome stranger"}</h2>
       <Login handleSignin={handleSignin}/>
     </div>
   );
