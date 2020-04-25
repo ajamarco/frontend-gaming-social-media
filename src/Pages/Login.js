@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 //icon
 import appIcon from '../Images/app_icon.png'
@@ -10,7 +11,12 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+//request library
+import Requests from '../Libraries/Requests'
+
+//TODO move styles to file inside /helpers. 
 const styles = {
     form: {
         textAlign: 'center'
@@ -25,12 +31,20 @@ const styles = {
         margin: "10px auto 10px auto"
     },
     button:{
-        marginTop: 20
-    }
-    
+        margin: "20px auto 10px auto",
+        position: 'relative'
+    },
+    customError:{
+        color: 'red',
+        fontSize:'0.8rem',
+        marginTop: 10
+    },
+    progress:{
+        position: 'absolute'
+    }  
 }
 
-function Login({classes}) {
+function Login({classes, history}) {
     const [value, setValue] = useState({
         email: '',
         password: '',
@@ -40,7 +54,33 @@ function Login({classes}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('inside submiting', e.target)
+        
+        //setting the loading to true
+        setValue({
+            ...value, 
+            loading:true
+        })
+
+        const loginDetails = {email: value.email, password: value.password};
+        Requests.signIn(loginDetails)
+          .then(data => {
+              setValue({
+                  ...value,
+                  loading:false
+              });
+              if (data.token){
+                localStorage.token = data.token;
+                history.push('/');
+              }
+              else alert('nope');
+          })
+          .catch(err => {
+              setValue({
+                  ...value,
+                  errors: err.response.data,
+                  loading: false
+              })
+          });
     }
     
     const handleChange = (e) => {
@@ -59,11 +99,41 @@ function Login({classes}) {
                     Login
                 </Typography>
                 <form noValidate onSubmit={(e) => handleSubmit(e)}>
-                    <TextField id="email" name="email" type="email" label="email" className={classes.textField} value={value.email} onChange={(e) => handleChange(e)} fullWidth/>
-                    <TextField id="password" name="password" type="password" label="password" className={classes.textField} value={value.password} onChange={(e) => handleChange(e)} fullWidth/>
-                    <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                    <TextField 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      label="email" 
+                      className={classes.textField} 
+                      value={value.email} 
+                      onChange={(e) => handleChange(e)} 
+                      helperText={value.errors.email}
+                      error={value.errors.email ? true : false}
+                      fullWidth/>
+                    <TextField 
+                      id="password" 
+                      name="password" 
+                      type="password" 
+                      label="Password" 
+                      className={classes.textField} 
+                      value={value.password} 
+                      helperText={value.errors.password}
+                      error={value.errors.password ? true : false}
+                      onChange={(e) => handleChange(e)} 
+                      fullWidth/>
+                      {value.errors.general && (
+                          <Typography variant="body2" className={classes.customError}>
+                              {value.errors.general}
+                          </Typography>
+                      )}
+                    <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={value.loading}>
                         Login
+                        {value.loading && (
+                            <CircularProgress size={30} className={classes.progress}/>
+                        )}
                     </Button>
+                    <br/>
+                    <small>Don't have an account? <Link to='/signup'>Sign up</Link></small>
                 </form>
             </Grid>
             <Grid item sm/>
