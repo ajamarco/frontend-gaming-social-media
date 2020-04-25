@@ -1,13 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import Grid from '@material-ui/core/Grid'
+import Requests from '../Libraries/Requests'
+import RenderPost from '../Components/RenderPost'
 
-export class Home extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Home Page</h1>
-            </div>
-        )
-    }
+function Home() {
+    const [posts, setPosts] = useState(null);
+
+    useEffect(() => {
+        Requests.fetchPosts()
+          .then(data => setPosts(data));
+    }, [])
+
+    let recentPosts = posts ? (posts.map(p => (
+        <RenderPost post={p}/>
+    ))) : <p>Loading...</p>;
+    return (
+        <Grid container spacing={7}>
+            <Grid item sm={4} xs={12}>
+                <p>Profile...</p>
+            </Grid>
+            <Grid item sm={8} xs={12}>
+                {recentPosts}
+            </Grid>
+        </Grid>
+    )
 }
 
 export default Home

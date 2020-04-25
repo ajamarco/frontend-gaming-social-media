@@ -1,6 +1,7 @@
 const baseURI = "http://localhost:3001"
 const signInURL = `${baseURI}/sign-in`
 const validateURL = `${baseURI}/validate`
+const getPostsURL = `${baseURI}/posts`
 
 const get = (url, token) => {
   return fetch(url,{
@@ -26,4 +27,6 @@ const signIn = (body) => postRequest(signInURL, body).then(response => response.
 
 const validate = (token) => get(validateURL, token).then(response => response.json())
 
-export default {signIn, validate}
+const fetchPosts = () => get(getPostsURL, "").then(response => response.json()) 
+
+export default {signIn, validate, fetchPosts}
