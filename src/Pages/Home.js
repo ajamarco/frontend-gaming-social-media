@@ -12,7 +12,7 @@ function Home() {
     }, [])
 
     let recentPosts = posts ? (posts.map(p => (
-        <RenderPost post={p}/>
+        <RenderPost post={p} key={p.id}/>
     ))) : <p>Loading...</p>;
     return (
         <Grid container spacing={7}>
