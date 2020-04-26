@@ -4,6 +4,7 @@ const initialState = {
     authenticated : false,
     credentials: {}, 
     likes: [],
+    loading: false,
     notifications: []
 };
 
@@ -19,8 +20,15 @@ export default function (state = initialState, action){
         case SET_USER:
             return {
                 authenticated: true,
+                loading: false,
                 ...action.payload
             }
+        case LOADING_UI:
+            return {
+                ...state,
+                loading: true
+            }
+
         default: 
             return state
     }

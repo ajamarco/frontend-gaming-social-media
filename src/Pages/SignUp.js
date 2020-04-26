@@ -16,6 +16,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //request library
 import Requests from '../Libraries/Requests'
 
+// Redux stuff 
+import { connect } from 'react-redux';
+import { signupUser } from '../Redux/Actions/userActions';
+
 //TODO move styles to file inside /helpers. 
 const styles = {
     form: {
@@ -45,7 +49,7 @@ const styles = {
     
 }
 
-function SignUp({classes, history}) {
+function SignUp({classes, history, signupUser}) {
     const [value, setValue] = useState({
         email: '',
         password: '',
@@ -57,12 +61,6 @@ function SignUp({classes, history}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        //setting the loading to true
-        setValue({
-            ...value, 
-            loading:true
-        })
-
         const newUserData = {
             user:{
                 email: value.email, 
@@ -70,39 +68,7 @@ function SignUp({classes, history}) {
                 password_confirmation: value.confirmPassword
             }
         };
-        Requests.signUp(newUserData)
-          .then(res => {
-              setValue({
-                ...value, 
-                loading: false      
-              })
-              if (res.token){
-                localStorage.token = res.token;
-                history.push('/');
-              }
-              else alert('nope');
-          })
-
-        
-        // Requests.signUp(newUserData)
-        //   .then(data => {
-        //       setValue({
-        //           ...value,
-        //           loading:false
-        //       });
-        //       if (data.token){
-        //         localStorage.token = data.token;
-        //         history.push('/');
-        //       }
-        //       else alert('nope');
-        //   })
-        //   .catch(err => {
-        //       setValue({
-        //           ...value,
-        //           errors: err.response.data,
-        //           loading: false
-        //       })
-        //   });
+        signupUser(newUserData, history);
     }
     
     const handleChange = (e) => {
@@ -178,4 +144,12 @@ SignUp.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(SignUp)
+const mapStateToProps = (state) => ({
+    user: state.user,
+    UI: state.UI
+  });
+  
+  export default connect(
+    mapStateToProps,
+    { signupUser }
+  )(withStyles(styles)(SignUp));

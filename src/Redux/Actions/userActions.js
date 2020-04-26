@@ -5,98 +5,100 @@ import {
     LOADING_UI,
     SET_UNAUTHENTICATED,
     LOADING_USER,
-    MARK_NOTIFICATIONS_READ
-  } from '../types';
-  import axios from 'axios';
+    SET_AUTHENTICATED
+  } from '../Types';
+  import Requests from '../../Libraries/Requests'
   
   export const loginUser = (userData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
-    axios
-      .post('/login', userData)
-      .then((res) => {
-        setAuthorizationHeader(res.data.token);
-        dispatch(getUserData());
-        dispatch({ type: CLEAR_ERRORS });
-        history.push('/');
-      })
-      .catch((err) => {
-        dispatch({
-          type: SET_ERRORS,
-          payload: err.response.data
-        });
-      });
+    
+    Requests.signIn(userData)
+          .then(data => {
+              if (data.token){
+                dispatch({type: SET_AUTHENTICATED})
+                localStorage.token = data.token;
+                history.push('/');
+              }
+              else alert('nope');
+          })
+          .catch(err => {
+              dispatch({type: SET_ERRORS,
+              payload: "Something went wrong"})
+          });
+
   };
   
   export const signupUser = (newUserData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
-    axios
-      .post('/signup', newUserData)
+    Requests.signUp(newUserData)
       .then((res) => {
-        setAuthorizationHeader(res.data.token);
-        dispatch(getUserData());
-        dispatch({ type: CLEAR_ERRORS });
-        history.push('/');
+        if (res.token){
+          localStorage.token = res.token;
+          history.push('/');
+        }
+        else alert('nope');
       })
       .catch((err) => {
         dispatch({
           type: SET_ERRORS,
-          payload: err.response.data
+          payload: "Something went wrong"
         });
       });
   };
+
   
-  export const logoutUser = () => (dispatch) => {
-    localStorage.removeItem('FBIdToken');
-    delete axios.defaults.headers.common['Authorization'];
-    dispatch({ type: SET_UNAUTHENTICATED });
-  };
+  // export const logoutUser = () => (dispatch) => {
+  //   localStorage.removeItem('FBIdToken');
+  //   delete axios.defaults.headers.common['Authorization'];
+  //   dispatch({ type: SET_UNAUTHENTICATED });
+  // };
   
-  export const getUserData = () => (dispatch) => {
-    dispatch({ type: LOADING_USER });
-    axios
-      .get('/user')
-      .then((res) => {
-        dispatch({
-          type: SET_USER,
-          payload: res.data
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  // export const getUserData = () => (dispatch) => {
+  //   dispatch({ type: LOADING_USER });
+  //   axios
+  //     .get('/user')
+  //     .then((res) => {
+  //       dispatch({
+  //         type: SET_USER,
+  //         payload: res.data
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   
-  export const uploadImage = (formData) => (dispatch) => {
-    dispatch({ type: LOADING_USER });
-    axios
-      .post('/user/image', formData)
-      .then(() => {
-        dispatch(getUserData());
-      })
-      .catch((err) => console.log(err));
-  };
+  // export const uploadImage = (formData) => (dispatch) => {
+  //   dispatch({ type: LOADING_USER });
+  //   axios
+  //     .post('/user/image', formData)
+  //     .then(() => {
+  //       dispatch(getUserData());
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   
-  export const editUserDetails = (userDetails) => (dispatch) => {
-    dispatch({ type: LOADING_USER });
-    axios
-      .post('/user', userDetails)
-      .then(() => {
-        dispatch(getUserData());
-      })
-      .catch((err) => console.log(err));
-  };
+  // export const editUserDetails = (userDetails) => (dispatch) => {
+  //   dispatch({ type: LOADING_USER });
+  //   axios
+  //     .post('/user', userDetails)
+  //     .then(() => {
+  //       dispatch(getUserData());
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   
-  export const markNotificationsRead = (notificationIds) => (dispatch) => {
-    axios
-      .post('/notifications', notificationIds)
-      .then((res) => {
-        dispatch({
-          type: MARK_NOTIFICATIONS_READ
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  // export const markNotificationsRead = (notificationIds) => (dispatch) => {
+  //   axios
+  //     .post('/notifications', notificationIds)
+  //     .then((res) => {
+  //       dispatch({
+  //         type: MARK_NOTIFICATIONS_READ
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   
-  const setAuthorizationHeader = (token) => {
-    const FBIdToken = `Bearer ${token}`;
-    localStorage.setItem('FBIdToken', FBIdToken);
-    axios.defaults.headers.common['Authorization'] = FBIdToken;
-  };
+  // const setAuthorizationHeader = (token) => {
+  //   const FBIdToken = `Bearer ${token}`;
+  //   localStorage.setItem('FBIdToken', FBIdToken);
+  //   axios.defaults.headers.common['Authorization'] = FBIdToken;
+  // };

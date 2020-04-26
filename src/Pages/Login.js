@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -13,8 +13,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-//request library
-import Requests from '../Libraries/Requests'
+// Redux stuff
+import { connect } from 'react-redux';
+import { loginUser } from '../Redux/Actions/userActions';
 
 //TODO move styles to file inside /helpers. 
 const styles = {
@@ -44,7 +45,8 @@ const styles = {
     }  
 }
 
-function Login({classes, history}) {
+function Login({classes, history, loginUser, user}) {
+
     const [value, setValue] = useState({
         email: '',
         password: '',
@@ -54,33 +56,10 @@ function Login({classes, history}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        //setting the loading to true
-        setValue({
-            ...value, 
-            loading:true
-        })
 
         const loginDetails = {email: value.email, password: value.password};
-        Requests.signIn(loginDetails)
-          .then(data => {
-              setValue({
-                  ...value,
-                  loading:false
-              });
-              if (data.token){
-                localStorage.token = data.token;
-                history.push('/');
-              }
-              else alert('nope');
-          })
-          .catch(err => {
-              setValue({
-                  ...value,
-                  errors: err.response.data,
-                  loading: false
-              })
-          });
+        loginUser(loginDetails, history);
+
     }
     
     const handleChange = (e) => {
@@ -126,11 +105,11 @@ function Login({classes, history}) {
                               {value.errors.general}
                           </Typography>
                       )}
-                    <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={value.loading}>
+                    <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={false}>
                         Login
-                        {value.loading && (
+                        {/* {value.loading && ( //TODO implement loading action
                             <CircularProgress size={30} className={classes.progress}/>
-                        )}
+                        )} */}
                     </Button>
                     <br/>
                     <small>Don't have an account? <Link to='/signup'>Sign up</Link></small>
@@ -145,4 +124,16 @@ Login.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Login)
+const mapStateToProps = (state) => ({
+    user: state.user,
+    UI: state.UI
+  });
+  
+  const mapActionsToProps = {
+    loginUser
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapActionsToProps
+  )(withStyles(styles)(Login));
