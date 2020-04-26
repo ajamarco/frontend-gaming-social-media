@@ -4,6 +4,7 @@ import './App.css';
 import Requests from './Libraries/Requests'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Navbar from "./Components/Navbar"
+import AuthRoute from './Helpers/AuthRoute'
 
 //MUI
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
@@ -15,8 +16,18 @@ import themeObj from './Helpers/Theme'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
+//session stuff
+import jwtDecode from 'jwt-decode'
 
 const theme = createMuiTheme(themeObj);
+
+
+const token = localStorage.token;
+// used to decode the token if we need the user id
+//if (token){
+//   const decodeToken = jwtDecode(token);
+//   console.log(decodeToken);
+// }
 
 function App() {
   return(
@@ -27,8 +38,8 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route exact path="/login" component={Login}/>
-              <Route exact path="/signup" component={SignUp}/>
+              <AuthRoute exact path="/login" component={Login} authenticated={token}/>
+              <AuthRoute exact path="/signup" component={SignUp} authenticated={token}/>
             </Switch>
           </div>
         </Router>
