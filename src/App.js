@@ -8,10 +8,13 @@ import AuthRoute from './Helpers/AuthRoute'
 
 //MUI
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
-
 import themeObj from './Helpers/Theme'
+
+//redux
+import { Provider } from 'react-redux';
+import store from './Redux/Store';
+
 //pages
 import Home from './Pages/Home'
 import Login from './Pages/Login'
@@ -32,7 +35,7 @@ const token = localStorage.token;
 function App() {
   return(
     <MuiThemeProvider theme={theme}>
-      <div className="App">
+      <Provider store={store}>
         <Router>
           <Navbar/>
           <div className="container">
@@ -43,7 +46,7 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     </MuiThemeProvider>
   )
 }
