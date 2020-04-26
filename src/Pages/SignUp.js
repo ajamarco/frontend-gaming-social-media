@@ -63,26 +63,46 @@ function SignUp({classes, history}) {
             loading:true
         })
 
-        const newUserData = {email: value.email, password: value.password, confirmPassword: value.confirmPassword};
+        const newUserData = {
+            user:{
+                email: value.email, 
+                password: value.password, 
+                password_confirmation: value.confirmPassword
+            }
+        };
         Requests.signUp(newUserData)
-          .then(data => {
+          .then(res => {
               setValue({
-                  ...value,
-                  loading:false
-              });
-              if (data.token){
-                localStorage.token = data.token;
+                ...value, 
+                loading: false      
+              })
+              if (res.token){
+                localStorage.token = res.token;
                 history.push('/');
               }
               else alert('nope');
           })
-          .catch(err => {
-              setValue({
-                  ...value,
-                  errors: err.response.data,
-                  loading: false
-              })
-          });
+
+        
+        // Requests.signUp(newUserData)
+        //   .then(data => {
+        //       setValue({
+        //           ...value,
+        //           loading:false
+        //       });
+        //       if (data.token){
+        //         localStorage.token = data.token;
+        //         history.push('/');
+        //       }
+        //       else alert('nope');
+        //   })
+        //   .catch(err => {
+        //       setValue({
+        //           ...value,
+        //           errors: err.response.data,
+        //           loading: false
+        //       })
+        //   });
     }
     
     const handleChange = (e) => {

@@ -1,6 +1,6 @@
 const baseURI = "http://localhost:3001"
 const signInURL = `${baseURI}/sign-in`
-const signUpURL = `${baseURI}/sign-up`
+const signUpURL = `${baseURI}/users`
 const validateURL = `${baseURI}/validate`
 const getPostsURL = `${baseURI}/posts`
 
