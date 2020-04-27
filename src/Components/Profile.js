@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
-// import EditDetails from './EditDetails';
+import EditDetails from './EditDetails';
 // import MyButton from '../../util/MyButton';
 // import ProfileSkeleton from '../../util/ProfileSkeleton';
 // MUI stuff
@@ -21,12 +21,19 @@ import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 //Redux
 import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../Redux/Actions/userActions';
+import { Tooltip, IconButton } from '@material-ui/core';
 
 const styles = (theme) => ({
     ...theme.spreadThis
   });
 
-const Profile = ({classes, user}) => {
+const Profile = ({classes, user, logoutUser}) => {
+
+    const handleLogout = (e) => {
+        logoutUser();
+    }
+
+    //TODO - fix the blink with the login / sign up page before the user details are loaded (should show "loading" instead)
     let profileMarkup;
     profileMarkup = !user.loading ? (user.authenticated? (
         <Paper className={classes.paper}>
@@ -67,6 +74,12 @@ const Profile = ({classes, user}) => {
                         <span>Joined {dayjs(user.credentials.created_at).format('MMM YYYY')}</span>
                     </>
                 </div>
+                <Tooltip title='Logout' placement="top">
+                    <IconButton onClick={(e) => handleLogout(e) }>
+                        <KeyboardReturn color="primary"/>
+                    </IconButton>
+                </Tooltip>
+                 <EditDetails/>
             </div>
         </Paper>
     ) : (

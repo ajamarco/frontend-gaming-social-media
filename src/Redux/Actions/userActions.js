@@ -51,6 +51,11 @@ import {
     localStorage.removeItem('token');
     dispatch({ type: SET_UNAUTHENTICATED });
   };
+
+  export const editUserDetails = (userDetails) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    //TODO update user details on the backend
+  };
   
   // export const getUserData = () => (dispatch) => {
   //   dispatch({ type: LOADING_USER });
