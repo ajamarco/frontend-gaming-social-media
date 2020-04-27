@@ -34,11 +34,12 @@ function EditDetails({classes}) {
     useEffect(() => {
         //TODO: after setup the backend, add the value here
         setInfo({
+            ...info,
             bio: 'testbio',
             website: 'http://www.youtube.com',
             location: 'London, UK'
         })
-    }, [])
+    }, [info.open])
 
     const handleOpen = () => {
         setInfo({
