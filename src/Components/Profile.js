@@ -5,7 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import EditDetails from './EditDetails';
-// import MyButton from '../../util/MyButton';
 // import ProfileSkeleton from '../../util/ProfileSkeleton';
 // MUI stuff
 import Button from '@material-ui/core/Button';
@@ -22,6 +21,7 @@ import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../Redux/Actions/userActions';
 import { Tooltip, IconButton } from '@material-ui/core';
+import MyButton from '../Helpers/MyButton';
 
 const styles = (theme) => ({
     ...theme.spreadThis
@@ -78,11 +78,9 @@ const Profile = ({classes, user, logoutUser}) => {
                         <span>Joined {dayjs(user.credentials.created_at).format('MMM YYYY')}</span>
                     </>
                 </div>
-                <Tooltip title='Logout' placement="top">
-                    <IconButton onClick={(e) => handleLogout(e) }>
-                        <KeyboardReturn color="primary"/>
-                    </IconButton>
-                </Tooltip>
+                <MyButton tip="Logout" onClick={(e) => handleLogout(e) }>
+                    <KeyboardReturn color="primary"/>
+                </MyButton>
                  <EditDetails/>
             </div>
         </Paper>
