@@ -15,7 +15,7 @@ import {
     Requests.signIn(userData)
           .then(data => {
               if (data.token){
-                dispatch({type: SET_AUTHENTICATED})
+                dispatch({ type: SET_AUTHENTICATED, payload: data });
                 localStorage.token = data.token;
                 history.push('/');
               }
@@ -31,9 +31,10 @@ import {
   export const signupUser = (newUserData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     Requests.signUp(newUserData)
-      .then((res) => {
+      .then(res => {
         if (res.token){
           localStorage.token = res.token;
+          dispatch({ type: SET_AUTHENTICATED, payload: res });
           history.push('/');
         }
         else alert('nope');
@@ -46,12 +47,10 @@ import {
       });
   };
 
-  
-  // export const logoutUser = () => (dispatch) => {
-  //   localStorage.removeItem('FBIdToken');
-  //   delete axios.defaults.headers.common['Authorization'];
-  //   dispatch({ type: SET_UNAUTHENTICATED });
-  // };
+  export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch({ type: SET_UNAUTHENTICATED });
+  };
   
   // export const getUserData = () => (dispatch) => {
   //   dispatch({ type: LOADING_USER });

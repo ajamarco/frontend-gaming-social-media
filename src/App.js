@@ -14,6 +14,8 @@ import themeObj from './Helpers/Theme'
 //redux
 import { Provider } from 'react-redux';
 import store from './Redux/Store';
+import { SET_AUTHENTICATED } from './Redux/Types';
+import { logoutUser, getUserData } from './Redux/Actions/userActions';
 
 //pages
 import Home from './Pages/Home'
@@ -26,11 +28,12 @@ const theme = createMuiTheme(themeObj);
 
 
 const token = localStorage.token;
-// used to decode the token if we need the user id
-//if (token){
-//   const decodeToken = jwtDecode(token);
-//   console.log(decodeToken);
-// }
+if (token){
+  Requests.validate(token)
+    .then(res => {
+      store.dispatch({ type: SET_AUTHENTICATED, payload: res });
+    })
+}
 
 function App() {
   return(
@@ -41,8 +44,8 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <AuthRoute exact path="/login" component={Login} authenticated={token}/>
-              <AuthRoute exact path="/signup" component={SignUp} authenticated={token}/>
+              <AuthRoute exact path="/login" component={Login}/>
+              <AuthRoute exact path="/signup" component={SignUp}/>
             </Switch>
           </div>
         </Router>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Requests from '../Libraries/Requests'
 import RenderPost from '../Components/RenderPost'
+import Profile from '../Components/Profile'
 
 function Home() {
     const [posts, setPosts] = useState(null);
@@ -17,7 +18,7 @@ function Home() {
     return (
         <Grid container spacing={7}>
             <Grid item sm={4} xs={12}>
-                <p>Profile...</p>
+                <Profile/>
             </Grid>
             <Grid item sm={8} xs={12}>
                 {recentPosts}

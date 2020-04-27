@@ -45,8 +45,7 @@ const styles = {
     }  
 }
 
-function Login({classes, history, loginUser, user}) {
-
+function Login({classes, history, loginUser}) {
     const [value, setValue] = useState({
         email: '',
         password: '',
