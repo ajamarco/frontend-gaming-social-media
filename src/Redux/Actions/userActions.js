@@ -54,7 +54,13 @@ import {
 
   export const editUserDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
-    //TODO update user details on the backend
+    Requests.updateUser(userDetails)
+        .then(data => {
+          console.log(data);
+          dispatch({type: SET_USER, payload: data})
+        });
+    //ooTODO update user details on the backend
+    //setUser
   };
   
   // export const getUserData = () => (dispatch) => {

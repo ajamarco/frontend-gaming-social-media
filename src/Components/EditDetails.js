@@ -23,7 +23,7 @@ const styles = (theme) => ({
   }
 });
 
-function EditDetails({classes}) {
+function EditDetails({classes, credentials, editUserDetails}) {
     const [info, setInfo] = useState({
         bio: '',
         website: '',
@@ -35,9 +35,9 @@ function EditDetails({classes}) {
         //TODO: after setup the backend, add the value here
         setInfo({
             ...info,
-            bio: 'testbio',
-            website: 'http://www.youtube.com',
-            location: 'London, UK'
+            bio: credentials.bio,
+            website: credentials.website ,
+            location: credentials.location
         })
     }, [info.open])
 
@@ -66,10 +66,12 @@ function EditDetails({classes}) {
         const userDetails = {
           bio: info.bio,
           website: info.website,
-          location: info.location
+          location: info.location,
+          user_id: credentials.id
         };
-        // editUserDetails(userDetails);//TODO: call user action to edit user
-        this.handleClose();
+        editUserDetails(userDetails);
+        //TODO: call user action to edit user
+        handleClose();
       };
 
     return (

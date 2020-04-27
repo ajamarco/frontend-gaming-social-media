@@ -47,13 +47,14 @@ const Profile = ({classes, user, logoutUser}) => {
                         {user.credentials.email}
                     </MuiLink>
                     <hr/>
+                    {/* Biography */}
                     <Typography variant="body2">
-                        Bio placeholder
+                        {user.credentials.bio ? user.credentials.bio : "Your bio goes here"}
                     </Typography>
                     <hr/>
                     {/* location */}
                     <> 
-                        <LocationOn color="primary"/> <span>LOCATION</span>
+                        <LocationOn color="primary"/> <span>{user.credentials.location ? user.credentials.location : "No Location Yet"}</span>
                         <hr/>
                     </>
                     {/* website */}
@@ -61,10 +62,13 @@ const Profile = ({classes, user, logoutUser}) => {
                         <LinkIcon color="primary">
                         </LinkIcon>
                         <span>
-                             <a href={"https://www.youtube.com/channel/UC8butISFwT-Wl7EV0hUK0BQ"} target="_blank" rel="noopener noreferrer">
-                            {' '}
-                            {"Website"}
-                            </a>
+                            {user.credentials.website ? (
+                                <a href={user.credentials.website} target="_blank" rel="noopener noreferrer">
+                                {' '}
+                                {"Website"}
+                                </a>
+                            ) : "No website yet"}
+                             
                         </span>
                         <hr/>
                     </>
