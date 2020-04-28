@@ -2,7 +2,8 @@ import {
     SET_POSTS,
     LOADING_DATA, 
     LIKE_POST,
-    UNLIKE_POST
+    UNLIKE_POST,
+    DELETE_POST
 } from '../Types'
 
 const initialState = {
@@ -24,12 +25,21 @@ export default function (state=initialState, action) {
                 posts: action.payload,
                 loading: false
             }
-        case LIKE_POST:
-        case UNLIKE_POST:
-            let index = state.posts.findIndex(p => p.id === action.payload.postId)
-            state.posts[index] = action.payload;
+        case DELETE_POST:
             return {
-                ...state
+                ...state,
+                posts: state.posts.filter(p => p.id != action.payload),
+                loading: false
+            }
+        case LIKE_POST:
+            return {
+
+            }
+        case UNLIKE_POST:
+            let index = state.posts.findIndex(p => p.id === action.payload)
+            state.posts[index]["likes_number"] -= 1;
+            return {
+                ...state,
             }
     
         default:

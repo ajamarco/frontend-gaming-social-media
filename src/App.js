@@ -31,6 +31,7 @@ const token = localStorage.token;
 if (token){
   Requests.validate(token)
     .then(res => {
+      console.log('user already logged in, res is', res)
       store.dispatch({ type: SET_AUTHENTICATED, payload: res });
     })
 }

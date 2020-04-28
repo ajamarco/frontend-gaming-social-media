@@ -3,6 +3,8 @@ const signInURL = `${baseURI}/sign-in`
 const signUpURL = `${baseURI}/users`
 const validateURL = `${baseURI}/validate`
 const getPostsURL = `${baseURI}/posts`
+const unlikeURL = `${baseURI}/unlike_post`
+const likeURL = `${baseURI}/likes`
 
 const get = (url, token) => {
   return fetch(url,{
@@ -10,6 +12,27 @@ const get = (url, token) => {
       "Authorization": token
     }
   })
+}
+
+const deleteLike = (url, body) => {
+  const configurationOject = {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }
+  return fetch(url, configurationOject);
+}
+
+const deletePostById = (url, id) => {
+  url = `${url}/${id}`;
+  const configurationOject = {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json'
+    }}
+  return fetch(url, configurationOject);
 }
 
 const postRequest = (url, body) =>{
@@ -33,7 +56,6 @@ const patchUser = (url, body) => {
     },
     body: JSON.stringify(body)
   }
-  debugger;
   url = `${url}/${body.user_id}`
   return fetch(url, configurationOject)
 }
@@ -48,4 +70,10 @@ const signUp = (body) => postRequest(signUpURL, body).then(response => response.
 
 const updateUser = (body) => patchUser(signUpURL, body).then(response => response.json());
 
-export default {signIn, validate, fetchPosts, signUp, updateUser }
+const deletePost = (postId) => deletePostById(getPostsURL, postId).then(response => response.json());
+
+const unlikePost = (body) => deleteLike(unlikeURL, body).then(response => response.json());
+
+const likePost = (body) => postRequest(likeURL, body).then(response => response.json());
+
+export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost }

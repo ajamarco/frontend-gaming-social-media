@@ -10,7 +10,8 @@ import {connect} from 'react-redux'
 import {getPosts} from '../Redux/Actions/DataActions'
 
 function Home({getPosts, data}) {
-  
+    let loading = data.loading;
+    console.log("loading is",loading);
     useEffect(() => {
         getPosts();
     }, [])

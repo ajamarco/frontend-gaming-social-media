@@ -1,4 +1,4 @@
-import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST} from '../Types'
+import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE} from '../Types'
 
 import Requests from '../../Libraries/Requests'
 
@@ -12,12 +12,34 @@ export const getPosts = () => dispatch => {
       }))
 }
 
+export const deletePost = (postId) => dispatch => {
+    dispatch({type: LOADING_DATA});
+    Requests.deletePost(postId)
+        .then(data => {
+            dispatch({
+                type: DELETE_POST,
+                payload: data.data
+            })
+        })
+}
+
 //like post
-export const likePost = (postId) => dispatch => {
-    //TODO: create function in Requests to go to the backend and create a new like action
+export const likePost = (body) => dispatch => {
+    dispatch({type: LOADING_DATA});
+    Requests.likePost(body)
+        .then(data => {
+            console.log('sucess', data);
+        })
 }
 
 //unlike post
-export const unlikePost = (postId) => dispatch => {
-    //TODO: create function in Requests to go to the backend and create a new like action
+export const unlikePost = (body) => dispatch => {
+    dispatch({type: LOADING_DATA});
+    Requests.unlikePost(body)
+        .then(data => {
+            dispatch({type: REMOVE_LIKE, 
+            payload: data.data.post_id});
+            dispatch({type: UNLIKE_POST, 
+                payload: data.data.post_id});
+        })
 }

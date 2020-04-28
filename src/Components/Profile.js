@@ -39,7 +39,7 @@ const Profile = ({classes, user, logoutUser}) => {
         <Paper className={classes.paper}>
             <div className={classes.profile}>
                 <div className="image-wrapper">
-                    <img src={'https://randomuser.me/api/portraits/med/men/75.jpg'} alt="profile" className="profile-image"/>
+                    <img src={'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} alt="profile" className="profile-image"/>
                 </div>
                 <hr/>
                 <div className="profile-details">
