@@ -3,16 +3,19 @@ import Grid from '@material-ui/core/Grid'
 import Requests from '../Libraries/Requests'
 import RenderPost from '../Components/RenderPost'
 import Profile from '../Components/Profile'
+import PropTypes from 'prop-types'
 
-function Home() {
-    const [posts, setPosts] = useState(null);
+//redux
+import {connect} from 'react-redux'
+import {getPosts} from '../Redux/Actions/DataActions'
 
+function Home({getPosts, data}) {
+  
     useEffect(() => {
-        Requests.fetchPosts()
-          .then(data => setPosts(data));
+        getPosts();
     }, [])
 
-    let recentPosts = posts ? (posts.map(p => (
+    let recentPosts = data.posts ? (data.posts.map(p => (
         <RenderPost post={p} key={p.id}/>
     ))) : <p>Loading...</p>;
     return (
@@ -27,4 +30,13 @@ function Home() {
     )
 }
 
-export default Home
+Home.propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+  };
+  
+  const mapStateToProps = (state) => ({
+    data: state.data
+  });
+
+export default connect(mapStateToProps,{getPosts})(Home)
