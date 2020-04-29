@@ -32,14 +32,19 @@ export default function (state=initialState, action) {
                 loading: false
             }
         case LIKE_POST:
-            return {
-
-            }
-        case UNLIKE_POST:
-            let index = state.posts.findIndex(p => p.id === action.payload)
-            state.posts[index]["likes_number"] -= 1;
+            let likeIndex = state.posts.findIndex(p => p.id === action.payload)
+            state.posts[likeIndex]["likes_number"] += 1;
             return {
                 ...state,
+                loading: false
+            }
+
+        case UNLIKE_POST:
+            let unlikeIndex = state.posts.findIndex(p => p.id === action.payload)
+            state.posts[unlikeIndex]["likes_number"] -= 1;
+            return {
+                ...state,
+                loading: false
             }
     
         default:

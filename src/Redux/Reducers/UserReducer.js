@@ -1,4 +1,4 @@
-import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, REMOVE_LIKE} from '../Types'
+import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, REMOVE_LIKE, ADD_LIKE} from '../Types'
 
 const initialState = {
     authenticated : false,
@@ -35,6 +35,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 likes: state.likes.filter(p => p !== action.payload),
+                loading: false
+            }
+        case ADD_LIKE:
+            return {
+                ...state,
+                likes: [...state.likes, action.payload],
                 loading: false
             }
             

@@ -10,10 +10,13 @@ import {connect} from 'react-redux'
 import {getPosts} from '../Redux/Actions/DataActions'
 
 function Home({getPosts, data}) {
-    let loading = data.loading;
-    console.log("loading is",loading);
+    const [posts, setPosts] = useState([]);
+    console.log("posts are", posts);
+    console.log(data.posts);
+
     useEffect(() => {
         getPosts();
+        setPosts(data.posts);
     }, [])
 
     let recentPosts = data.posts ? (data.posts.map(p => (
