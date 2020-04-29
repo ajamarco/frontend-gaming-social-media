@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import MyButton from '../Helpers/MyButton';
 import DeleteButton from './DeleteButton'
 import LikeButton from './LikeButton'
-
+import PostDetails from './PostDetails'
 //MUI
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -67,6 +67,7 @@ function RenderPost({classes, post, user}) {
                 </Typography>
                 <LikeButton postId={post.id}/>
                 <span>{post.likes_number} likes</span> 
+                <PostDetails postId={post.id} userEmail={user.email}/>
             </CardContent>
         </Card>
     )

@@ -56,3 +56,7 @@ export const unlikePost = (body) => dispatch => {
         })
 }
 
+export const getPost = (postId) => dispatch => {
+    console.log(postId);
+}
+
