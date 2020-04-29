@@ -1,7 +1,8 @@
 import {
     SET_ERRORS,
     CLEAR_ERRORS,
-    LOADING_UI
+    LOADING_UI,
+    FINISH_LOADING
   } from '../Types';
 
   const initialState = {
@@ -28,6 +29,11 @@ import {
           ...state,
           loading: true
         };
+      case FINISH_LOADING: 
+        return{
+          ...state,
+          loading: false
+        }
       default:
         return state;
     }

@@ -1,4 +1,4 @@
-import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE, NEW_POST} from '../Types'
+import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE, NEW_POST, SET_POST, FINISH_LOADING, LOADING_UI, UPDATE_POST_OBJECT} from '../Types'
 
 import Requests from '../../Libraries/Requests'
 
@@ -30,8 +30,12 @@ export const likePost = (body) => dispatch => {
         .then(data => {
             dispatch({type: LIKE_POST, 
                 payload: data.data.post_id});
+            dispatch({type: UPDATE_POST_OBJECT,
+                payload: data.data.post_id})
             dispatch({type: ADD_LIKE, 
             payload: data.data.post_id});
+            dispatch({type: FINISH_LOADING})
+
         })
 }
 
@@ -53,10 +57,19 @@ export const unlikePost = (body) => dispatch => {
                 payload: data.data.post_id});
             dispatch({type: REMOVE_LIKE, 
             payload: data.data.post_id});
+            dispatch({type: UPDATE_POST_OBJECT,
+                payload: data.data.post_id})
+            dispatch({type: FINISH_LOADING})
         })
 }
 
 export const getPost = (postId) => dispatch => {
-    console.log(postId);
+    dispatch({type: LOADING_UI});
+    Requests.getPost(postId)
+        .then(data => {
+            dispatch({type: SET_POST,
+            payload: data})
+            dispatch({type: FINISH_LOADING})
+        })
 }
 

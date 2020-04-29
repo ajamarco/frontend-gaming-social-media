@@ -67,7 +67,7 @@ function RenderPost({classes, post, user}) {
                 </Typography>
                 <LikeButton postId={post.id}/>
                 <span>{post.likes_number} likes</span> 
-                <PostDetails postId={post.id} userEmail={user.email}/>
+                <PostDetails postDetails={post} userEmail={user.credentials.email} postId={post.id}/>
             </CardContent>
         </Card>
     )

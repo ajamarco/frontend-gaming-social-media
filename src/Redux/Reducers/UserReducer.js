@@ -24,7 +24,8 @@ export default function (state = initialState, action){
             return {
                 authenticated: true,
                 loading: false,
-                credentials: action.payload
+                credentials: action.payload,
+                likes: action.payload.likes
             }
         case LOADING_USER:
             return {
@@ -43,7 +44,7 @@ export default function (state = initialState, action){
                 likes: [...state.likes, action.payload],
                 loading: false
             }
-            
+       
         default: 
             return state
     }

@@ -60,6 +60,11 @@ const patchUser = (url, body) => {
   return fetch(url, configurationOject)
 }
 
+const getSinglePost = (url, id) => {
+  url = `${url}/${id}`;
+  return fetch(url);
+}
+
 const signIn = (body) => postRequest(signInURL, body).then(response => response.json());
 
 const validate = (token) => get(validateURL, token).then(response => response.json())
@@ -78,4 +83,6 @@ const likePost = (body) => postRequest(likeURL, body).then(response => response.
 
 const addPost = (body) => postRequest(getPostsURL,body).then(response => response.json());
 
-export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost }
+const getPost = (postId) => getSinglePost(getPostsURL, postId).then(response => response.json());
+
+export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost, getPost }

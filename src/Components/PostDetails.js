@@ -1,5 +1,5 @@
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../Helpers/MyButton';
@@ -21,7 +21,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 // Redux stuff
 import { connect } from 'react-redux';
 import {getPost} from '../Redux/Actions/DataActions';
-//TODO: create the get post function on user action
+
 const styles = (theme) => ({
     ...theme.spreadThis,
     profileImage: {
@@ -48,13 +48,72 @@ const styles = (theme) => ({
     }
   });
 
-function PostDetails({classes, getPost, post, UI}) {
+function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
     const [open, setOpen] = useState(false);
+    useEffect(() => {
+      console.log('inside effect', ui.loading);
+      postId && getPost(postId);
+    }, [open])
+
+    const dialogMarkup = ( !ui.loading && open ? (
+      <Grid container spacing={16}>
+            <Grid item sm={5}>
+                {/* user picture */}
+                <img 
+                    src={'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} alt="Profile"
+                    className={classes.profileImage}/>
+            </Grid>
+            <Grid item sm={7}>
+                <Typography
+                component={Link}
+                color="primary"
+                variant="h5"
+                to={`/users/${post.user.user_id}`}
+                > 
+                    {post.user.email}
+                </Typography>
+                <hr className={classes.invisibleSeparator} />
+                <Typography variant="body2" color="textSecondary">
+                    {dayjs(post.created_at).format('h:mm a, MMMM DD YYYY')}
+                </Typography>
+                <hr className={classes.invisibleSeparator} />
+                <Typography variant="body1">
+                    {post.content}
+                </Typography>
+                <LikeButton postId={post.id}/>
+                <span>{post.likes_number} likes</span>
+                
+            </Grid>
+        </Grid>
+    ) : (<h3>LOADING...</h3>)
+      
+        
+    )
+
     return (
         <React.Fragment>
             <MyButton onClick={() => setOpen(true)} tip="Post details" tipClassName={classes.expandButton}>
                 <UnfoldMore color="primary"/>
             </MyButton>
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+                fullWidth
+                maxWidth="sm"
+                >
+                
+            <MyButton 
+                tip="Close"
+                onClick={() => setOpen(false)}
+                tipClassName={classes.closeButton}
+                >
+                <CloseIcon/>
+            </MyButton>
+            <DialogContent className={classes.DialogContent}>
+                {dialogMarkup}
+            </DialogContent>
+
+            </Dialog>
         </React.Fragment>
     )
 }
@@ -68,8 +127,8 @@ PostDetails.propTypes = {
   };
 
   const mapStateToProps = (state) => ({
-    scream: state.data.post,
-    UI: state.UI
+    post: state.data.post,
+    ui: state.ui
   });
 
   const mapActionsToProps = {

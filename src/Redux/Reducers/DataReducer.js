@@ -4,7 +4,9 @@ import {
     LIKE_POST,
     UNLIKE_POST,
     DELETE_POST,
-    NEW_POST
+    NEW_POST,
+    SET_POST,
+    UPDATE_POST_OBJECT
 } from '../Types'
 
 const initialState = {
@@ -53,6 +55,18 @@ export default function (state=initialState, action) {
                 state,
                 loading: false,
                 posts: [action.payload, ...state.posts]
+            }
+        case SET_POST:
+            return{
+                ...state,
+                post: action.payload
+            }
+        case UPDATE_POST_OBJECT:
+            let obj = state.posts.find(p => p.id === action.payload)
+            // debugger;
+            return {
+                ...state,
+                post: obj
             }
     
         default:
