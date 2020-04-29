@@ -48,8 +48,11 @@ export default function (state=initialState, action) {
                 loading: false
             };
         case NEW_POST:
+            // let newPosts = state.posts.unshift()
             return {
-                
+                state,
+                loading: false,
+                posts: [action.payload, ...state.posts]
             }
     
         default:

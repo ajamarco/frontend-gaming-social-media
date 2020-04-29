@@ -36,7 +36,7 @@ const styles = {
 
 function RenderPost({classes, post, user}) {
     //check if logged user is the creator of the post
-    console.log("likes number are",post.likes_number)
+    
     const deleteButton = user.authenticated && user.credentials.id === post.user.user_id ? (
         <DeleteButton id={post.id} /> 
     ): null;

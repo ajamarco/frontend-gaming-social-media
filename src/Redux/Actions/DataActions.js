@@ -35,6 +35,15 @@ export const likePost = (body) => dispatch => {
         })
 }
 
+export const createNewPost = (body) => dispatch => {
+    dispatch({type: LOADING_DATA});
+    Requests.addPost(body)
+        .then(data => {
+            dispatch({type: NEW_POST, 
+                payload: data});
+        })
+}
+
 //unlike post
 export const unlikePost = (body) => dispatch => {
     dispatch({type: LOADING_DATA});
@@ -47,6 +56,3 @@ export const unlikePost = (body) => dispatch => {
         })
 }
 
-export const createNewPost = (body) => dispatch => {
-    //create new post
-}

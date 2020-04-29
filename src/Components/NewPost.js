@@ -33,7 +33,7 @@ const styles = (theme) => ({
   });
 
 
-function NewPost({classes, newPost}) {
+function NewPost({classes, createNewPost, user}) {
     const [open, setOpen] = useState(false);
     const [body, setBody] = useState('');
 
@@ -43,8 +43,13 @@ function NewPost({classes, newPost}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const post = {
+            content: body,
+            user_id: user.credentials.id
+        }
         //create a new post here. find the action
-        // newPost(body);
+        createNewPost(post);
+        setOpen(false);
       };
 
 
@@ -102,7 +107,8 @@ NewPost.propTypes = {
   };
   
   const mapStateToProps = (state) => ({
-    UI: state.UI
+    UI: state.UI,
+    user: state.user
   });
   
   export default connect(

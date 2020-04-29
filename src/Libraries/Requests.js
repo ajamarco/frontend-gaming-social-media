@@ -76,4 +76,6 @@ const unlikePost = (body) => deleteLike(unlikeURL, body).then(response => respon
 
 const likePost = (body) => postRequest(likeURL, body).then(response => response.json());
 
-export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost }
+const addPost = (body) => postRequest(getPostsURL,body).then(response => response.json());
+
+export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost }

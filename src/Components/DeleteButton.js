@@ -26,7 +26,6 @@ function DeleteButton({classes, id, deletePost}) {
     const [open, setOpen] = useState(false);
 
     const handleDelete = (postId) => {
- 
         deletePost(postId);
         setOpen(false);
     }

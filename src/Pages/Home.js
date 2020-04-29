@@ -11,8 +11,6 @@ import {getPosts} from '../Redux/Actions/DataActions'
 
 function Home({getPosts, data}) {
     const [posts, setPosts] = useState([]);
-    console.log("posts are", posts);
-    console.log(data.posts);
 
     useEffect(() => {
         getPosts();
