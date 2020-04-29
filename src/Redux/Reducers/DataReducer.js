@@ -3,7 +3,8 @@ import {
     LOADING_DATA, 
     LIKE_POST,
     UNLIKE_POST,
-    DELETE_POST
+    DELETE_POST,
+    NEW_POST
 } from '../Types'
 
 const initialState = {
@@ -37,7 +38,7 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 loading: false
-            }
+            };
 
         case UNLIKE_POST:
             let unlikeIndex = state.posts.findIndex(p => p.id === action.payload)
@@ -45,6 +46,10 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 loading: false
+            };
+        case NEW_POST:
+            return {
+                
             }
     
         default:

@@ -26,7 +26,7 @@ function DeleteButton({classes, id, deletePost}) {
     const [open, setOpen] = useState(false);
 
     const handleDelete = (postId) => {
-        //TODO:  call dataaction to delete the post
+ 
         deletePost(postId);
         setOpen(false);
     }

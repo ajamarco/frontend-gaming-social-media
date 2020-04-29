@@ -1,4 +1,4 @@
-import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE} from '../Types'
+import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE, NEW_POST} from '../Types'
 
 import Requests from '../../Libraries/Requests'
 
@@ -45,4 +45,8 @@ export const unlikePost = (body) => dispatch => {
             dispatch({type: REMOVE_LIKE, 
             payload: data.data.post_id});
         })
+}
+
+export const createNewPost = (body) => dispatch => {
+    //create new post
 }

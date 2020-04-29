@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 //components
 import MyButton from '../Helpers/MyButton'
+import NewPost from './NewPost'
 //MUI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,9 +24,10 @@ class Navbar extends Component {
                     {authenticated ? (
                         //if authenticated**
                         <Fragment>
-                            <MyButton tip="Create a Post">
+                            <NewPost/>
+                            {/* <MyButton tip="Create a Post">
                                 <AddIcon/>
-                            </MyButton>
+                            </MyButton> */}
                             <Link to="/">
                                 <MyButton tip="Home">
                                     <HomeIcon/>
