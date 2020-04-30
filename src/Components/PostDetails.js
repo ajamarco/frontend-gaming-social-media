@@ -82,7 +82,10 @@ function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
                 </Typography>
                 <LikeButton postId={post.id}/>
                 <span>{post.likes_number} likes</span>
-                
+                <MyButton tip="comments">
+                    <ChatIcon color="primary"/>
+                </MyButton>
+                <span>{post.comments_on_post.length} comments</span>
             </Grid>
         </Grid>
     ) : (<h3>LOADING...</h3>)
