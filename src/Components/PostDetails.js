@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../Helpers/MyButton';
 import LikeButton from './LikeButton';
-// import Comments from './Comments';
-// import CommentForm from './CommentForm';
+import Comments from './Comments';
+import CommentForm from './CommentForm';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 // MUI Stuff
@@ -25,8 +25,8 @@ import {getPost} from '../Redux/Actions/DataActions';
 const styles = (theme) => ({
     ...theme.spreadThis,
     profileImage: {
-      maxWidth: 200,
-      height: 200,
+      maxWidth: 150,
+      height: 150,
       borderRadius: '50%',
       objectFit: 'cover'
     },
@@ -87,6 +87,9 @@ function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
                 </MyButton>
                 <span>{post.comments_on_post.length} comments</span>
             </Grid>
+            <hr className={classes.visibleSeparator} />
+            <CommentForm postId={post.id} />
+            <Comments comments={post.comments_on_post}/>
         </Grid>
     ) : (<h3>LOADING...</h3>)
       

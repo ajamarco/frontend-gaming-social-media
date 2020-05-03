@@ -5,6 +5,7 @@ const validateURL = `${baseURI}/validate`
 const getPostsURL = `${baseURI}/posts`
 const unlikeURL = `${baseURI}/unlike_post`
 const likeURL = `${baseURI}/likes`
+const commentURL = `${baseURI}/comments`
 
 const get = (url, token) => {
   return fetch(url,{
@@ -85,4 +86,6 @@ const addPost = (body) => postRequest(getPostsURL,body).then(response => respons
 
 const getPost = (postId) => getSinglePost(getPostsURL, postId).then(response => response.json());
 
-export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost, getPost }
+const createComment = (comment) => postRequest(commentURL, comment).then(response => response.json());
+
+export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost, getPost, createComment }

@@ -5,6 +5,7 @@ export const SET_USER = 'SET_USER';
 export const LOADING_USER = 'LOADING_USER';
 export const REMOVE_LIKE = 'REMOVE_LIKE';
 export const ADD_LIKE = 'ADD_LIKE';
+export const SET_UNLOADING = 'SET_UNLOADING';
 
 //dispatch action.type
 // UI reducer types
@@ -22,4 +23,5 @@ export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
 export const SET_POST = "SET_POST"
 export const UPDATE_POST_OBJECT = "UPDATE_POST_OBJECT"
+export const NEW_COMMENT = "NEW_COMMENT"
 

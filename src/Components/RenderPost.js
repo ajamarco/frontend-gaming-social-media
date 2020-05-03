@@ -34,7 +34,7 @@ const styles = {
     }
 }
 
-function RenderPost({classes, post, user}) {
+function RenderPost({classes, post, user, actualPost}) {
     //check if logged user is the creator of the post
     
     const deleteButton = user.authenticated && user.credentials.id === post.user.user_id ? (
@@ -42,6 +42,7 @@ function RenderPost({classes, post, user}) {
     ): null;
 
     dayjs.extend(relativeTime);
+    debugger;
     return (
         <Card className={classes.card}>
             <CardMedia 
@@ -70,6 +71,7 @@ function RenderPost({classes, post, user}) {
                 <MyButton tip="comments">
                     <ChatIcon color="primary"/>
                 </MyButton>
+                {console.log("posts.length", post.comments_on_post.length, "postid", post.id)}
                 <span>{post.comments_on_post.length} comments</span>
                 <PostDetails postDetails={post} userEmail={user.credentials.email} postId={post.id}/>
             </CardContent>

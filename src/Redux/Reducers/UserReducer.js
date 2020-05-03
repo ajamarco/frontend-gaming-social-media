@@ -1,4 +1,4 @@
-import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, REMOVE_LIKE, ADD_LIKE} from '../Types'
+import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, REMOVE_LIKE, ADD_LIKE, SET_UNLOADING} from '../Types'
 
 const initialState = {
     authenticated : false,
@@ -44,6 +44,12 @@ export default function (state = initialState, action){
                 likes: [...state.likes, action.payload],
                 loading: false
             }
+        case SET_UNLOADING:
+            return { 
+                ...state,
+                loading: false
+            }
+        
        
         default: 
             return state

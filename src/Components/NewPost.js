@@ -52,7 +52,7 @@ function NewPost({classes, createNewPost, user}) {
         setOpen(false);
       };
 
-
+//TODO: check if user is authenticated before open this...
     return (
         <React.Fragment>
             <MyButton onClick={() => setOpen(true)} tip="Create new post">

@@ -6,7 +6,8 @@ import {
     DELETE_POST,
     NEW_POST,
     SET_POST,
-    UPDATE_POST_OBJECT
+    UPDATE_POST_OBJECT, 
+    NEW_COMMENT
 } from '../Types'
 
 const initialState = {
@@ -62,13 +63,20 @@ export default function (state=initialState, action) {
                 post: action.payload
             }
         case UPDATE_POST_OBJECT:
+            debugger;
             let obj = state.posts.find(p => p.id === action.payload)
-            // debugger;
             return {
                 ...state,
                 post: obj
             }
-    
+        case NEW_COMMENT:
+            let updatePost = state.posts.findIndex(p => p.id === action.payload.post_id)
+            console.log("upd post", updatePost);
+            state.posts[updatePost].comments_on_post.unshift(action.payload);
+            return {
+                ...state,
+                loading: false
+            }
         default:
             return state;
     }

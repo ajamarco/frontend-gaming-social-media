@@ -1,4 +1,4 @@
-import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE, NEW_POST, SET_POST, FINISH_LOADING, LOADING_UI, UPDATE_POST_OBJECT} from '../Types'
+import {SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST, DELETE_POST, REMOVE_LIKE, ADD_LIKE, NEW_POST, SET_POST, FINISH_LOADING, LOADING_UI, UPDATE_POST_OBJECT, NEW_COMMENT, SET_UNLOADING} from '../Types'
 
 import Requests from '../../Libraries/Requests'
 
@@ -70,6 +70,19 @@ export const getPost = (postId) => dispatch => {
             dispatch({type: SET_POST,
             payload: data})
             dispatch({type: FINISH_LOADING})
+        })
+}
+
+export const submitComment = (comment) => dispatch => {
+    dispatch({type: LOADING_DATA});
+    Requests.createComment(comment)
+        .then(data => {
+            dispatch({type: UPDATE_POST_OBJECT,
+                payload: data.post_id})
+            dispatch({type: NEW_COMMENT,
+                payload: data})
+            dispatch({type: FINISH_LOADING});
+            dispatch({type: SET_UNLOADING})
         })
 }
 
