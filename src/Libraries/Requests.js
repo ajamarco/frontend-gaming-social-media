@@ -7,12 +7,16 @@ const unlikeURL = `${baseURI}/unlike_post`
 const likeURL = `${baseURI}/likes`
 const commentURL = `${baseURI}/comments`
 
-const get = (url, token) => {
-  return fetch(url,{
-    headers: {
-      "Authorization": token
-    }
-  })
+const get = (url, token = "") => {
+  if (token !== ""){
+    return fetch(url,{
+      headers: {
+        "Authorization": token
+      }
+    });
+  }else{
+    return fetch(url);
+  }
 }
 
 const deleteLike = (url, body) => {
@@ -88,4 +92,6 @@ const getPost = (postId) => getSinglePost(getPostsURL, postId).then(response => 
 
 const createComment = (comment) => postRequest(commentURL, comment).then(response => response.json());
 
-export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost, getPost, createComment }
+const getUserData = (user_id) => get(`${signUpURL}/${user_id}`).then(response => response.json());
+
+export default {signIn, validate, fetchPosts, signUp, updateUser, deletePost, unlikePost, likePost, addPost, getPost, createComment, getUserData }

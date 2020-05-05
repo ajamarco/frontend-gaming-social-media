@@ -16,13 +16,13 @@ import { Provider } from 'react-redux';
 import store from './Redux/Store';
 import { SET_AUTHENTICATED } from './Redux/Types';
 import { logoutUser, getUserData } from './Redux/Actions/userActions';
+import {getPosts} from './Redux/Actions/DataActions'
 
 //pages
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
-//session stuff
-import jwtDecode from 'jwt-decode'
+import User from './Pages/User'
 
 const theme = createMuiTheme(themeObj);
 
@@ -47,6 +47,7 @@ function App() {
               <Route exact path="/" component={Home}/>
               <AuthRoute exact path="/login" component={Login}/>
               <AuthRoute exact path="/signup" component={SignUp}/>
+              <Route exact path="/users/:user_id" component={User}/>
             </Switch>
           </div>
         </Router>

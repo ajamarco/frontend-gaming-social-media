@@ -7,13 +7,16 @@ import {
     NEW_POST,
     SET_POST,
     UPDATE_POST_OBJECT, 
-    NEW_COMMENT
+    NEW_COMMENT,
+    SET_USER_DATA
 } from '../Types'
 
 const initialState = {
     posts: [],
     post: {},
-    loading: false
+    loading: false,
+    userData: {},
+    userPosts: {}
 }
 
 export default function (state=initialState, action) {
@@ -63,7 +66,7 @@ export default function (state=initialState, action) {
                 post: action.payload
             }
         case UPDATE_POST_OBJECT:
-            debugger;
+            // debugger;
             let obj = state.posts.find(p => p.id === action.payload)
             return {
                 ...state,
@@ -75,6 +78,14 @@ export default function (state=initialState, action) {
             state.posts[updatePost].comments_on_post.unshift(action.payload);
             return {
                 ...state,
+                loading: false
+            }
+
+        case SET_USER_DATA: 
+            state.userPosts = state.posts.filter(p => p.user.user_id === action.payload.id)
+            return {
+                ...state,
+                userData: action.payload,
                 loading: false
             }
         default:

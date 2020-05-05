@@ -5,7 +5,7 @@ import {
     LOADING_UI,
     SET_UNAUTHENTICATED,
     LOADING_USER,
-    SET_AUTHENTICATED
+    SET_AUTHENTICATED,
   } from '../Types';
   import Requests from '../../Libraries/Requests'
   
@@ -59,9 +59,8 @@ import {
           console.log(data);
           dispatch({type: SET_USER, payload: data})
         });
-    //ooTODO update user details on the backend
-    //setUser
   };
+
   
   // export const getUserData = () => (dispatch) => {
   //   dispatch({ type: LOADING_USER });

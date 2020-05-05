@@ -42,7 +42,7 @@ function RenderPost({classes, post, user, actualPost}) {
     ): null;
 
     dayjs.extend(relativeTime);
-    debugger;
+    // debugger;
     return (
         <Card className={classes.card}>
             <CardMedia 

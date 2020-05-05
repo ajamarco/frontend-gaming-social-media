@@ -21,7 +21,8 @@ export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
-export const SET_POST = "SET_POST"
-export const UPDATE_POST_OBJECT = "UPDATE_POST_OBJECT"
-export const NEW_COMMENT = "NEW_COMMENT"
+export const SET_POST = "SET_POST";
+export const UPDATE_POST_OBJECT = "UPDATE_POST_OBJECT";
+export const NEW_COMMENT = "NEW_COMMENT";
+export const SET_USER_DATA = "SET_USER_DATA";
 
