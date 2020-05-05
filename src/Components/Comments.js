@@ -41,7 +41,7 @@ function Comments({comments, classes}) {
                                     to={`/users/${user_id}`}
                                     color="primary"
                                 >
-                                    {user_id}
+                                    {comment.user.email}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
                                     {dayjs(created_at).format('h:mm a, MMMM DD YYYY')}
