@@ -18,7 +18,6 @@ function User({match, getUser, data}) {
           return p.user.user_id == match.params.user_id
         }))
     }, [])
-    console.log('userPosts', userPosts);
 const profileMarkup = (
   data.loading ? (
     <p>loading</p>

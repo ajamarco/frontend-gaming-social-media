@@ -28,6 +28,7 @@ function EditDetails({classes, credentials, editUserDetails}) {
         bio: '',
         website: '',
         location: '',
+        img_url: '',
         open: false
     })
 
@@ -36,7 +37,8 @@ function EditDetails({classes, credentials, editUserDetails}) {
         setInfo({
             ...info,
             bio: credentials.bio,
-            website: credentials.website ,
+            img_url: credentials.img_url,
+            website: credentials.website,
             location: credentials.location
         })
     }, [info.open])
@@ -67,6 +69,7 @@ function EditDetails({classes, credentials, editUserDetails}) {
           bio: info.bio,
           website: info.website,
           location: info.location,
+          img_url: info.img_url,
           user_id: credentials.id
         };
         editUserDetails(userDetails);
@@ -115,6 +118,16 @@ function EditDetails({classes, credentials, editUserDetails}) {
                             placeholder="Where you live"
                             className={classes.textField}
                             value={info.location}
+                            onChange={(e) => handleChange(e)}
+                            fullWidth
+                        />
+                        <TextField
+                            name="img_url"
+                            tpye="text"
+                            label="Profile Image (URL)"
+                            placeholder="Add your profile image here"
+                            className={classes.textField}
+                            value={info.img_url}
                             onChange={(e) => handleChange(e)}
                             fullWidth
                         />

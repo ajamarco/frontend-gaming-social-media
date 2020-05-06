@@ -35,18 +35,18 @@ const styles = {
 }
 
 function RenderPost({classes, post, user, actualPost}) {
-    //check if logged user is the creator of the post
+    const img_url = post.user.img_url  ? post.user.img_url : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
     
     const deleteButton = user.authenticated && user.credentials.id === post.user.user_id ? (
         <DeleteButton id={post.id} /> 
     ): null;
 
     dayjs.extend(relativeTime);
-    // debugger;
+    console.log('inside render post. img url',img_url);
     return (
         <Card className={classes.card}>
             <CardMedia 
-                image={'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'}
+                image={img_url}
                 title="Profile image"
                 className={classes.image}
             />
@@ -71,7 +71,6 @@ function RenderPost({classes, post, user, actualPost}) {
                 <MyButton tip="comments">
                     <ChatIcon color="primary"/>
                 </MyButton>
-                {console.log("posts.length", post.comments_on_post.length, "postid", post.id)}
                 <span>{post.comments_on_post.length} comments</span>
                 <PostDetails postDetails={post} userEmail={user.credentials.email} postId={post.id}/>
             </CardContent>

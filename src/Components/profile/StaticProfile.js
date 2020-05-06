@@ -17,7 +17,6 @@ const styles = (theme) => ({
   });
 
 function StaticProfile({classes, profile}) {
-    console.log("profile loaded",profile);
     return (
         <Paper className={classes.paper}>
             <div className={classes.profile}>

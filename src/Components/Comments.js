@@ -24,6 +24,8 @@ function Comments({comments, classes}) {
 
     const renderComment = (comment, index) => {
         const {content, user_id, created_at} = comment;
+        const img_url = comment.user.img_url  ? comment.user.img_url : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+        console.log('inside comments', img_url)
         // TODO: add a img_url for the user image;
         // TODO: add the user name instead of the user_id
         return (
@@ -31,7 +33,7 @@ function Comments({comments, classes}) {
                 <Grid item sm={12}>
                     <Grid container>
                         <Grid item sm={2}>
-                            <img src={'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} alt="profile" className={classes.commentImage}/>
+                            <img src={img_url} alt="profile" className={classes.commentImage}/>
                         </Grid>
                         <Grid item sm={9}>
                             <div className={classes.commentData}>

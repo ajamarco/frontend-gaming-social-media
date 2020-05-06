@@ -51,7 +51,6 @@ const styles = (theme) => ({
 function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
     const [open, setOpen] = useState(false);
     useEffect(() => {
-      console.log('inside effect', ui.loading);
       postId && getPost(postId);
     }, [open])
 

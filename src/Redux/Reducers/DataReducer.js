@@ -74,7 +74,6 @@ export default function (state=initialState, action) {
             }
         case NEW_COMMENT:
             let updatePost = state.posts.findIndex(p => p.id === action.payload.post_id)
-            console.log("upd post", updatePost);
             state.posts[updatePost].comments_on_post.unshift(action.payload);
             return {
                 ...state,
