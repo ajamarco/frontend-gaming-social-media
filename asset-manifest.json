@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/frontend-gaming-social-media/static/css/main.ae19b17c.chunk.css",
-    "main.js": "/frontend-gaming-social-media/static/js/main.18b0e856.chunk.js",
-    "main.js.map": "/frontend-gaming-social-media/static/js/main.18b0e856.chunk.js.map",
+    "main.js": "/frontend-gaming-social-media/static/js/main.8e7ead84.chunk.js",
+    "main.js.map": "/frontend-gaming-social-media/static/js/main.8e7ead84.chunk.js.map",
     "runtime-main.js": "/frontend-gaming-social-media/static/js/runtime-main.16740d31.js",
     "runtime-main.js.map": "/frontend-gaming-social-media/static/js/runtime-main.16740d31.js.map",
     "static/js/2.08b97592.chunk.js": "/frontend-gaming-social-media/static/js/2.08b97592.chunk.js",
     "static/js/2.08b97592.chunk.js.map": "/frontend-gaming-social-media/static/js/2.08b97592.chunk.js.map",
     "index.html": "/frontend-gaming-social-media/index.html",
-    "precache-manifest.c194e82e7e481cf78f914f168df1384a.js": "/frontend-gaming-social-media/precache-manifest.c194e82e7e481cf78f914f168df1384a.js",
+    "precache-manifest.9759942a2b2e9660b58e0849f210e28b.js": "/frontend-gaming-social-media/precache-manifest.9759942a2b2e9660b58e0849f210e28b.js",
     "service-worker.js": "/frontend-gaming-social-media/service-worker.js",
     "static/css/main.ae19b17c.chunk.css.map": "/frontend-gaming-social-media/static/css/main.ae19b17c.chunk.css.map",
     "static/js/2.08b97592.chunk.js.LICENSE.txt": "/frontend-gaming-social-media/static/js/2.08b97592.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.16740d31.js",
     "static/js/2.08b97592.chunk.js",
     "static/css/main.ae19b17c.chunk.css",
-    "static/js/main.18b0e856.chunk.js"
+    "static/js/main.8e7ead84.chunk.js"
   ]
 }

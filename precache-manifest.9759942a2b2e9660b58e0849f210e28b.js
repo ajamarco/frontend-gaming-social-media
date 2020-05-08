@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fa971aeae1491f4135711a4f5c9a61c6",
+    "revision": "48103b7001ae9e788c510dff1222834d",
     "url": "/frontend-gaming-social-media/index.html"
   },
   {
-    "revision": "43876aeb22382bb20c11",
+    "revision": "2d9a3f5516e3e2f1d292",
     "url": "/frontend-gaming-social-media/static/css/main.ae19b17c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/frontend-gaming-social-media/static/js/2.08b97592.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "43876aeb22382bb20c11",
-    "url": "/frontend-gaming-social-media/static/js/main.18b0e856.chunk.js"
+    "revision": "2d9a3f5516e3e2f1d292",
+    "url": "/frontend-gaming-social-media/static/js/main.8e7ead84.chunk.js"
   },
   {
     "revision": "056eb59fb27ac85894ac",
