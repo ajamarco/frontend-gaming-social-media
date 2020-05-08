@@ -1,4 +1,4 @@
-const baseURI = "http://localhost:3001"
+const baseURI = "https://gaming-social-media-app.herokuapp.com"
 const signInURL = `${baseURI}/sign-in`
 const signUpURL = `${baseURI}/users`
 const validateURL = `${baseURI}/validate`
