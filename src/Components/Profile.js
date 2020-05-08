@@ -29,6 +29,7 @@ const styles = (theme) => ({
 
 const Profile = ({classes, user, logoutUser}) => {
 
+    const img_url = user.credentials.img_url ? user.credentials.img_url : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
     const handleLogout = (e) => {
         logoutUser();
     }
@@ -39,7 +40,7 @@ const Profile = ({classes, user, logoutUser}) => {
         <Paper className={classes.paper}>
             <div className={classes.profile}>
                 <div className="image-wrapper">
-                    <img src={`${user.credentials.img_url}`} alt="profile" className="profile-image"/>
+                    <img src={`${img_url}`} alt="profile" className="profile-image"/>
                 </div>
                 <hr/>
                 <div className="profile-details">

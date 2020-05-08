@@ -53,13 +53,14 @@ function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
     useEffect(() => {
       postId && getPost(postId);
     }, [open])
-
+  
     const dialogMarkup = ( !ui.loading && open ? (
       <Grid container spacing={16}>
             <Grid item sm={5}>
                 {/* user picture */}
                 <img 
-                    src={'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} alt="Profile"
+                    src={post.user.img_url ? post.user.img_url : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} 
+                    alt="Profile"
                     className={classes.profileImage}/>
             </Grid>
             <Grid item sm={7}>
