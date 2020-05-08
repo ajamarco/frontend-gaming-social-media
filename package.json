@@ -1,4 +1,5 @@
 {
+  "homepage": "https://ajamarco.github.io/frontend-gaming-social-media/",
   "name": "frontend-gamming-social-media",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "dayjs": "^1.8.25",
+    "gh-pages": "^2.2.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -23,6 +25,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
