@@ -65,10 +65,8 @@ function PostDetails({classes, getPost, post, postDetails, postId, ui}) {
             </Grid>
             <Grid item sm={7}>
                 <Typography
-                component={Link}
                 color="primary"
                 variant="h5"
-                to={`/users/${post.user.user_id}`}
                 > 
                     {post.user.email}
                 </Typography>

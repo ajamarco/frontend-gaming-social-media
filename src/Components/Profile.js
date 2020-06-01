@@ -44,9 +44,14 @@ const Profile = ({classes, user, logoutUser}) => {
                 </div>
                 <hr/>
                 <div className="profile-details">
-                    <MuiLink component={Link} to={`/users/${user.credentials.id}`} color="primary" variant="h5">
-                        {user.credentials.email}
-                    </MuiLink>
+
+                    <Typography 
+                    variant="h5" 
+                    color="primary">
+                    {user.credentials.email}
+                </Typography>
+                
+
                     <hr/>
                     {/* Biography */}
                     <Typography variant="body2">

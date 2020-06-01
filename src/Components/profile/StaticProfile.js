@@ -25,6 +25,9 @@ function StaticProfile({classes, profile}) {
                 </div>
                 <hr/>
                 <div className="profile-details">
+
+                    
+
                     <MuiLink
                         component={Link}
                         
@@ -34,6 +37,8 @@ function StaticProfile({classes, profile}) {
                         variant="h5">
                         {profile.email}
                     </MuiLink>
+
+
                     <hr/>
                     {profile.bio && <Typography variant="body2">{profile.bio}</Typography>}
                     <Typography variant="body2">bio</Typography>

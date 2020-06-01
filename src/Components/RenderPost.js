@@ -53,8 +53,6 @@ function RenderPost({classes, post, user, actualPost}) {
             <CardContent className={classes.content}>
                 <Typography 
                     variant="h5" 
-                    component={Link} 
-                    to={`/users/${post.user.user_id}`}
                     color="primary">
                     {post.user.email}
                 </Typography>

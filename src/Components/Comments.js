@@ -39,8 +39,6 @@ function Comments({comments, classes}) {
                             <div className={classes.commentData}>
                                 <Typography
                                     variant="h5"
-                                    component={Link}
-                                    to={`/users/${user_id}`}
                                     color="primary"
                                 >
                                     {comment.user.email}
