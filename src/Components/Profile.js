@@ -28,15 +28,17 @@ const styles = (theme) => ({
   });
 
 const Profile = ({classes, user, logoutUser}) => {
-
+    //create the user image, lodaded from the credentials or the default image url
     const img_url = user.credentials.img_url ? user.credentials.img_url : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+
+    //if user clicks on the logout button Redux will handle the user logout
     const handleLogout = (e) => {
         logoutUser();
     }
 
-    //TODO - fix the blink with the login / sign up page before the user details are loaded (should show "loading" instead)
-    let profileMarkup;
-    profileMarkup = !user.loading ? (user.authenticated? (
+    //profileMarkup will have all the JSX code if the user is logged in
+    //if the user is not loading and is logged in we will show this information
+    let profileMarkup = !user.loading ? (user.authenticated? (
         <Paper className={classes.paper}>
             <div className={classes.profile}>
                 <div className="image-wrapper">
@@ -90,7 +92,7 @@ const Profile = ({classes, user, logoutUser}) => {
                  <EditDetails/>
             </div>
         </Paper>
-    ) : (
+    ) : ( /*if the user is not loading and NOT logged in we will redirect him to log in / sign up */
         <Paper className={classes.paper}>
             <Typography variant="body2" align="center">
                 No profile found, please login
@@ -100,6 +102,7 @@ const Profile = ({classes, user, logoutUser}) => {
                 <Button variant="contained" color="secondary" component={Link} to="/signup">Sign Up</Button>
             </div>
         </Paper>
+        /*if the loading state is true we will show LOADING */
     ) ) : (<p>Loading...</p>);
 
     return (
