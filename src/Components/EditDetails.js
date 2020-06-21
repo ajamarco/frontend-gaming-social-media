@@ -16,6 +16,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 
+//set the styles for this component
 const styles = (theme) => ({
   ...theme.spreadThis,
   button: {
@@ -23,7 +24,9 @@ const styles = (theme) => ({
   }
 });
 
+//MAIN function
 function EditDetails({classes, credentials, editUserDetails}) {
+    //holds all the user info, as well if the dialog is opened or not
     const [info, setInfo] = useState({
         bio: '',
         website: '',
@@ -32,8 +35,9 @@ function EditDetails({classes, credentials, editUserDetails}) {
         open: false
     })
 
+    //when info.open is moddified populate the info with the user information
     useEffect(() => {
-        //TODO: after setup the backend, add the value here
+        
         setInfo({
             ...info,
             bio: credentials.bio,
@@ -43,6 +47,7 @@ function EditDetails({classes, credentials, editUserDetails}) {
         })
     }, [info.open])
 
+    //handles the opening event. will set the info.open to true
     const handleOpen = () => {
         setInfo({
             ...info, 
@@ -50,6 +55,7 @@ function EditDetails({classes, credentials, editUserDetails}) {
         });
     }
 
+    //handles the closing event. will set the info.open to FALSE
     const handleClose = () => {
         setInfo({
             ...info, 
@@ -57,6 +63,8 @@ function EditDetails({classes, credentials, editUserDetails}) {
         });
     }
 
+    //handles the change event in the text fields. Synching the change 
+    //with what is in the state
     const handleChange = (e) => {
         setInfo({
             ...info,
@@ -64,6 +72,8 @@ function EditDetails({classes, credentials, editUserDetails}) {
         })
     }
 
+    //handle the submit event. Sending all the new information to the server
+    //including the user credentials
     const handleSubmit = () => {
         const userDetails = {
           bio: info.bio,
@@ -78,9 +88,13 @@ function EditDetails({classes, credentials, editUserDetails}) {
 
     return (
         <Fragment>
+            {/* this is will only the button to edit the info at first. 
+            if clicked will show the dialog below */}
             <MyButton tip="Edit Details" onClick={() => handleOpen()} btnClassName={classes.button}>
                 <EditIcon color="primary" />
             </MyButton>
+            {/* dialog will only be open if open is true.
+            when it closes, it will call handleClose */}
             <Dialog
                 open={info.open}
                 onClose={() => handleClose()}
@@ -89,6 +103,7 @@ function EditDetails({classes, credentials, editUserDetails}) {
                     <DialogTitle>Edit your details</DialogTitle>
                     <DialogContent>
                         <form>
+                        {/* form to set all the user details */}
                         <TextField
                             name="bio"
                             tpye="text"
@@ -134,9 +149,11 @@ function EditDetails({classes, credentials, editUserDetails}) {
                         </form>
                     </DialogContent>
                     <DialogActions>
+                    {/* if clicked on cancel just close the dialog */}
                         <Button onClick={() => handleClose()} color="primary">
                             Cancel
                         </Button>
+                        {/* if clicked on Save call submit function */}
                         <Button onClick={() => handleSubmit()} color="primary">
                             Save
                         </Button>

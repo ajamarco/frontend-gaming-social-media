@@ -9,10 +9,12 @@ import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import {submitComment} from '../Redux/Actions/DataActions';
 
+//on the style we just add the main style file
 const styles = (theme) => ({
     ...theme.spreadThis
 });
 
+//MAIN function
 function CommentForm({classes, user, submitComment, postId}) {
     const [body, setBody] = useState('');
 
@@ -20,17 +22,23 @@ function CommentForm({classes, user, submitComment, postId}) {
         setBody(e.target.value);
     }
 
+    //handles the submit comment button
     const handleSubmit = (e) => {
         e.preventDefault();
+        //create a new comment object
         const comment = {
             content: body,
             post_id: postId,
             user_id: user.credentials.id
         }
+        //we send this object to the submitComment function 
         submitComment(comment);
+        //reset the body for a new comment
         setBody("");
       };
 
+    //holds what the html will looks like. 
+    //if the user is authenticated we will show the form
     const commentFormMarkup = user.authenticated ? (
         <Grid item sm={12} style={{ textAlign: 'center' }}>
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -54,9 +62,9 @@ function CommentForm({classes, user, submitComment, postId}) {
         </form>
         <hr className={classes.invisibleSeparator} />            
         </Grid>
-    ):(null);
+    ):/*if is NOT logged in we will show nothing */ (null);
 
-
+    //commentFormMarkup will show on the screen
     return commentFormMarkup
 }
 

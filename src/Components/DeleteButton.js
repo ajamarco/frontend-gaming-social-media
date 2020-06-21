@@ -13,6 +13,7 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import { connect } from 'react-redux';
 import { deletePost } from '../Redux/Actions/DataActions';
 
+//styles for the delete button
 const styles = {
     deleteButton: {
       position: 'absolute',
@@ -22,9 +23,13 @@ const styles = {
   };
 
 
+//MAIN function
 function DeleteButton({classes, id, deletePost}) {
+    //controls if the dialog will show or not
     const [open, setOpen] = useState(false);
 
+    //handles the delete button, calling the deletePost function and 
+    //hiding the dialog
     const handleDelete = (postId) => {
         deletePost(postId);
         setOpen(false);
@@ -32,7 +37,8 @@ function DeleteButton({classes, id, deletePost}) {
     return (
         <div>
             <React.Fragment>
-                
+                {/*sets the MyButton component to show an X for deleting a post*/}
+                {/* if clicked on that button, opens the dialog */}
                  <MyButton 
                     tip="Delete Post"
                     onClick={() => setOpen(true)}
@@ -40,6 +46,8 @@ function DeleteButton({classes, id, deletePost}) {
                     >
                     <DeleteOutline color="secondary"/>
                 </MyButton>
+                {/* will only be opened if open is true 
+                if closes will set the open to false */}
                 <Dialog
                     open={open}
                     onClose={() => setOpen(false)}
@@ -50,12 +58,16 @@ function DeleteButton({classes, id, deletePost}) {
                         Do you really want to delete this post? 
                     </DialogTitle>
                     <DialogActions>
+                    {/* if clicked on cancel just close the dialog using the
+                    useState */}
                         <Button 
                             onClick={() => setOpen(false)}
                             color="primary"
                             >
                             Cancel   
                         </Button>
+                        {/* if clicks on the delete button 
+                        send the post id to handleDelete */}
                         <Button 
                             onClick={() => handleDelete(id)}
                             color="secondary"
